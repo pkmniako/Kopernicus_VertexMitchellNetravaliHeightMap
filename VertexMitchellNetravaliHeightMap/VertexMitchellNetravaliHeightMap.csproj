@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net4.7.2</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup> 
+
+  <ItemGroup>
+  	<Reference Include="Assembly-CSharp">
+      <HintPath>D:\Users\Niako\SteamLibrary\steamapps\common\Kerbal Space Program - 1.12\KSP_x64_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>D:\Users\Niako\SteamLibrary\steamapps\common\Kerbal Space Program - 1.12\KSP_x64_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>D:\Users\Niako\SteamLibrary\steamapps\common\Kerbal Space Program - 1.12\KSP_x64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Users\Niako\SteamLibrary\steamapps\common\Kerbal Space Program - 1.12\KSP_x64_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
+	<Reference Include="Kopernicus">
+      <HintPath>D:\Users\Niako\SteamLibrary\steamapps\common\Kerbal Space Program - 1.12\GameData\Kopernicus\Plugins\Kopernicus.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Kopernicus.Parser">
+      <HintPath>D:\Users\Niako\SteamLibrary\steamapps\common\Kerbal Space Program - 1.12\GameData\Kopernicus\Plugins\Kopernicus.Parser.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ModularFlightIntegrator">
+      <HintPath>D:\Users\Niako\SteamLibrary\steamapps\common\Kerbal Space Program - 1.12\GameData\ModularFlightIntegrator\ModularFlightIntegrator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
