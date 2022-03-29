@@ -1,7 +1,5 @@
 # Better Heightmap Algorithm for Kerbal Space Program
 
-![License](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)
-
 Mod for Kerbal Space Program that adds a custom PQS Mod which implements a variant of ``VertexHeightMap`` using _Mitchell-Netravali Filtering_ instead of _Bilineal Filtering_.
 
 This reduces the amount of _pixelization_ at cliffs and other decently-detailed areas of a heightmap.
