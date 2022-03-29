@@ -35,6 +35,8 @@ VertexMitchellNetravaliHeightMap
 }
 ```
 
+By default, ``B`` and ``C`` are equal to ``1/3``.
+
 ---
 ---
 
