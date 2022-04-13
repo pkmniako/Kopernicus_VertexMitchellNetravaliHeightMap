@@ -12,11 +12,7 @@ This mod still requires testing (Just in case), so use it with caution.
 
 With a compiled .dll file inside the ``GameData``, you can use the ``VertexMitchellNetravaliHeightMap`` PQS Mod in Kopernicus Configuration Files.
 
-The PQSs mod also contains two new parameters: ``B`` and ``C``. These control what type of filtering is done. Values ``B = 1/3, C = 1/3`` and ``B = 1, C = 0`` have been tested and yield decent results.
-
-Here you can see a table that roughly describes the results you might expect with specific ``B`` and ``C`` values:
-
-![B and C comparison](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Mitchell-Netravali_artifacts.svg/300px-Mitchell-Netravali_artifacts.svg.png)
+The PQSs mod also contains two new parameters: ``B`` and ``C``. These control what type of filtering is done. Values ``B = 1/3, C = 1/3`` and ``B = 1, C = 0`` have been tested and yield decent results (Though the later is by far the most smooth).
 
 An example of a ``VertexMitchellNetravaliHeightMap`` node:
 
