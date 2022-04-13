@@ -19,9 +19,9 @@ namespace NiakoKerbalMods {
 			}
 
 			/// <summary> B value for the Mitchell-Netravali Filter </summary>
-			public float B = 0.3333333333f;
+			public double B = 0.3333333333f;
 			/// <summary> C value for the Mitchell-Netravali Filter </summary>
-			public float C = 0.3333333333f;
+			public double C = 0.3333333333f;
 
 			/// <summary> Have the constants been precalculated already? </summary>
 			protected bool hasConstantsPrecalculated = false;
@@ -86,20 +86,18 @@ namespace NiakoKerbalMods {
 				PrecalculateConstants();
 			}
 
-			public override void OnVertexBuildHeight(PQS.VertexBuildData data) {
-				//base.OnVertexBuildHeight(data); //Normal Bilineal Filtered Heightmap
-
+			public double InterpolateHeights(double u, double v) {
 				//Calculate necesary variables
 				double iWidth = 1.0/heightMap.Width;
 				double iHeight = 1.0/heightMap.Height;
 
-				double x0 = Math.Floor(data.u * heightMap.Width);
-				double y0 = Math.Floor(data.v * heightMap.Height);
+				double x0 = Math.Floor(u * heightMap.Width);
+				double y0 = Math.Floor(v * heightMap.Height);
 				double u0 = x0/heightMap.Width;
 				double v0 = y0/heightMap.Height;
 
-				double uD = (data.u - u0) * heightMap.Width;
-				double vD = (data.v - v0) * heightMap.Height;
+				double uD = (u - u0) * heightMap.Width;
+				double vD = (v - v0) * heightMap.Height;
 
 				//Calculate height (Interpolate)
 				double[] PY = new double[4];
@@ -114,10 +112,16 @@ namespace NiakoKerbalMods {
 					PY[j+1] = RunMitchellNetravali(PX[0], PX[1], PX[2], PX[3], uD);
 				}
 
-				double heightNormalized = RunMitchellNetravali(PY[0], PY[1], PY[2], PY[3], vD);
+				double output = RunMitchellNetravali(PY[0], PY[1], PY[2], PY[3], vD);
+
+				return output;
+			}
+
+			public override void OnVertexBuildHeight(PQS.VertexBuildData data) {
+				//base.OnVertexBuildHeight(data); //Normal Bilineal Filtered Heightmap
 
 				//Apply height
-				data.vertHeight += heightMapOffset + heightMapDeformity * (heightNormalized < 0 ? 0 : heightNormalized);
+				data.vertHeight += heightMapOffset + heightMapDeformity * (double)InterpolateHeights(data.u, data.v);
 			}
 		}
 	}

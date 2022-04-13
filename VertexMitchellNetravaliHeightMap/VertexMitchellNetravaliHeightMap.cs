@@ -1,7 +1,10 @@
+using System;
+using System.Diagnostics.CodeAnalysis;
 using Kopernicus.ConfigParser.Attributes;
 using Kopernicus.ConfigParser.BuiltinTypeParsers;
 using Kopernicus.Configuration.ModLoader;
 using Kopernicus.Configuration.Parsing;
+using Kopernicus.ConfigParser.Enumerations;
 using UnityEngine;
 
 namespace NiakoKerbalMods {
@@ -12,7 +15,7 @@ namespace NiakoKerbalMods {
 		///	Kopernicus Parser for the PQSMod VertexBilinealHeightMap
 		///	</summary>
 
-		[RequireConfigType(Kopernicus.ConfigParser.Enumerations.ConfigType.Node)]
+		[RequireConfigType(ConfigType.Node)]
 		public class VertexMitchellNetravaliHeightMap : ModLoader<PQSMod_VertexMitchellNetravaliHeightMap> {
 			/*
 				PQS Input Values, mapped directly to the normal VertexHeightMap values
@@ -24,31 +27,31 @@ namespace NiakoKerbalMods {
 			}
 
 			[ParserTarget("deformity")]
-			public NumericParser<double> heightMapDeformity {
+			public NumericParser<Double> heightMapDeformity {
 				get { return Mod.heightMapDeformity; }
 				set { Mod.heightMapDeformity = value; }
 			}
 
 			[ParserTarget("offset")]
-			public NumericParser<double> heightMapOffset {
+			public NumericParser<Double> heightMapOffset {
 				get { return Mod.heightMapOffset; }
 				set { Mod.heightMapOffset = value; }
 			}
 
 			[ParserTarget("scaleDeformityByRadius")]
-			public NumericParser<bool> scaleDeformityByRadius {
+			public NumericParser<Boolean> scaleDeformityByRadius {
 				get { return Mod.scaleDeformityByRadius; }
 				set { Mod.scaleDeformityByRadius = value; }
 			}
 
 			[ParserTarget("B")]
-			public NumericParser<float> B {
+			public NumericParser<Double> B {
 				get { return Mod.B; }
 				set { Mod.B = value; }
 			}
 
 			[ParserTarget("C")]
-			public NumericParser<float> C {
+			public NumericParser<Double> C {
 				get { return Mod.C; }
 				set { Mod.C = value; }
 			}

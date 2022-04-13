@@ -2,7 +2,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: KSPAssembly("KopernicusExpansion.VertexMitchellNetravaliHeightMap", 0, 1)]
+[assembly: KSPAssembly("KopernicusExpansion.VertexMitchellNetravaliHeightMap", 0, 2)]
 [assembly: KSPAssemblyDependency("Kopernicus", 1, 0)]
 
 [assembly: AssemblyTitle("VertexMitchellNetravaliHeightMap PQS Mod")]
