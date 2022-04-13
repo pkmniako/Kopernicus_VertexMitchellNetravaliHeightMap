@@ -1,3 +1,5 @@
+Check the [**wiki**](https://github.com/pkmniako/Kopernicus_VertexMitchellNetravaliHeightMap/wiki) for updated information.
+
 # Better Heightmap Algorithm for Kerbal Space Program
 
 Mod for Kerbal Space Program that adds a custom PQS Mod which implements a variant of ``VertexHeightMap`` using _Mitchell-Netravali Filtering_ instead of _Bilineal Filtering_.
