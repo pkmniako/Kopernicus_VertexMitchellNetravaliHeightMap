@@ -14,14 +14,10 @@ namespace NiakoKerbalMods {
 		/// PQSMod that adds Bilineal Filtering for the stock VertexHeightMap PQSMod
 		/// </summary>
 		public class PQSMod_VertexMitchellNetravaliHeightMap : PQSMod_VertexHeightMap {
-			private double GetGreyscaleValueFromMap(int x, int y, int width, int height) {
-				return (double)heightMap.GetPixelFloat(((double)x)/width, ((double)y)/height);
-			}
-
 			/// <summary> B value for the Mitchell-Netravali Filter </summary>
-			public double B = 0.3333333333f;
+			public double B = 1.0f;
 			/// <summary> C value for the Mitchell-Netravali Filter </summary>
-			public double C = 0.3333333333f;
+			public double C = 0.0f;
 
 			/// <summary> Have the constants been precalculated already? </summary>
 			protected bool hasConstantsPrecalculated = false;
@@ -40,7 +36,12 @@ namespace NiakoKerbalMods {
 			private double _2BC;
 			private double _6B;
 			private double _n3B1;
-			private double _maxD;
+			private double iWidth;
+			private double iHeight;
+
+			
+			private double[] PY = new double[4];
+			private double[] PX = new double[4];
 
 			/// <summary> Precalculates constants that are used at OnVertexBuildHeight </summary>
 			public void PrecalculateConstants() {
@@ -56,11 +57,13 @@ namespace NiakoKerbalMods {
 				_6B = (1/6.0) * B;
 				_n3B1 = (-1/3.0) * B + 1;
 
-				double iWidth = 1.0/heightMap.Width;
-				double iHeight = 1.0/heightMap.Height;
-				_maxD = Math.Sqrt(iWidth * iWidth + iHeight * iHeight);
+				iWidth = 1.0/heightMap.Width;
+				iHeight = 1.0/heightMap.Height;
+
+				hasConstantsPrecalculated = true;
 
 				Debug.Log("[VertexMitchellNetravaliHeightMap] New Constant values for B = " + B + " and C = " + C);
+				Debug.Log("[VertexMitchellNetravaliHeightMap] Map's Size: " + heightMap.Width + "x" + heightMap.Height);
 			}
 
 			public double RunMitchellNetravali(double P0, double P1, double P2, double P3, double d) {
@@ -72,49 +75,51 @@ namespace NiakoKerbalMods {
 				return output;
 			}
 
-			protected double ClampLoop(double value, double min, double max) {
-				double d = max - min;
+			protected int ClampLoop(int value, int min, int max) {
+				int d = max - min;
 				return value < min ? value + d : (value >= max ? value - d : value);
 			}
 
-			protected double Clamp(double value, double min, double max) {
-				return value < min ? min : (value >= max ? max : value);
-			}
-
-			public override void OnSetup() {
-				base.OnSetup();
-				PrecalculateConstants();
+			protected int Clamp(int value, int min, int max) {
+				return value < min ? min : (value >= max ? max - 1 : value);
 			}
 
 			public double InterpolateHeights(double u, double v) {
-				//Calculate necesary variables
-				double iWidth = 1.0/heightMap.Width;
-				double iHeight = 1.0/heightMap.Height;
+				if(!hasConstantsPrecalculated) {
+					PrecalculateConstants();
+				}
 
-				double x0 = Math.Floor(u * heightMap.Width);
-				double y0 = Math.Floor(v * heightMap.Height);
-				double u0 = x0/heightMap.Width;
-				double v0 = y0/heightMap.Height;
+				//Calculate necesary variables
+				int x0 = (int)Math.Floor(u * heightMap.Width);
+				int y0 = (int)Math.Floor(v * heightMap.Height);
+				double u0 = x0/(double)heightMap.Width;
+				double v0 = y0/(double)heightMap.Height;
 
 				double uD = (u - u0) * heightMap.Width;
 				double vD = (v - v0) * heightMap.Height;
 
 				//Calculate height (Interpolate)
-				double[] PY = new double[4];
 
 				for(int j = -1; j < 3; j++) {
-					double[] PX = new double[4];
-					double mapV = Clamp((y0 + j)/heightMap.Height, 0, 1);
+					Int32 y = Clamp(y0 + j, 0, heightMap.Height);
 					for(int i = -1; i < 3; i++) {
-						double mapU = ClampLoop((x0 + i)/heightMap.Width, -0.5, 0.5);
-						PX[i + 1] = heightMap.GetPixelFloat(mapU, mapV);
+						Int32 x = ClampLoop(x0 + i, 0, heightMap.Width);
+						PX[i + 1] = heightMap.GetPixelFloat(x, y);
 					}
 					PY[j+1] = RunMitchellNetravali(PX[0], PX[1], PX[2], PX[3], uD);
+					//PY[j + 1] = PX[0];
 				}
 
 				double output = RunMitchellNetravali(PY[0], PY[1], PY[2], PY[3], vD);
 
+				//return heightMap.GetPixelFloat(u, v);
+
 				return output;
+			}
+
+			public override void OnSetup() {
+				base.OnSetup();
+				PrecalculateConstants();
 			}
 
 			public override void OnVertexBuildHeight(PQS.VertexBuildData data) {

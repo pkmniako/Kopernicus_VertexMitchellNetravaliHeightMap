@@ -15,31 +15,37 @@ namespace NiakoKerbalMods {
 		///	Kopernicus Parser for the PQSMod VertexBilinealHeightMap
 		///	</summary>
 
-		[RequireConfigType(ConfigType.Node)]
+    	[RequireConfigType(ConfigType.Node)]
+    	[SuppressMessage("ReSharper", "UnusedMember.Global")]
 		public class VertexMitchellNetravaliHeightMap : ModLoader<PQSMod_VertexMitchellNetravaliHeightMap> {
-			/*
-				PQS Input Values, mapped directly to the normal VertexHeightMap values
-			*/
+			// The map texture for the planet
 			[ParserTarget("map")]
-			public MapSOParserRGB<MapSO> heightMap {
+			public MapSOParserGreyScale<MapSO> HeightMap
+			{
 				get { return Mod.heightMap; }
 				set { Mod.heightMap = value; }
 			}
 
-			[ParserTarget("deformity")]
-			public NumericParser<Double> heightMapDeformity {
-				get { return Mod.heightMapDeformity; }
-				set { Mod.heightMapDeformity = value; }
-			}
-
+			// Height map offset
 			[ParserTarget("offset")]
-			public NumericParser<Double> heightMapOffset {
+			public NumericParser<Double> HeightMapOffset
+			{
 				get { return Mod.heightMapOffset; }
 				set { Mod.heightMapOffset = value; }
 			}
 
+			// Height map offset
+			[ParserTarget("deformity")]
+			public NumericParser<Double> HeightMapDeformity
+			{
+				get { return Mod.heightMapDeformity; }
+				set { Mod.heightMapDeformity = value; }
+			}
+
+			// Height map offset
 			[ParserTarget("scaleDeformityByRadius")]
-			public NumericParser<Boolean> scaleDeformityByRadius {
+			public NumericParser<Boolean> ScaleDeformityByRadius
+			{
 				get { return Mod.scaleDeformityByRadius; }
 				set { Mod.scaleDeformityByRadius = value; }
 			}
