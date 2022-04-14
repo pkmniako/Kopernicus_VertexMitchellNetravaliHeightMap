@@ -66,6 +66,7 @@ namespace NiakoKerbalMods {
 				Debug.Log("[VertexMitchellNetravaliHeightMap] Map's Size: " + heightMap.Width + "x" + heightMap.Height);
 			}
 
+			/// <summary> Run Mitchell-Netravali Filter with precalculated constants </summary>
 			public double RunMitchellNetravali(double P0, double P1, double P2, double P3, double d) {
 				double output = (_n6BnC*P0 + _n32BnC2*P1 + _32BCn2*P2 + _6BC*P3) * d*d*d
 								+ (_2B2C*P0 + _2BCn3*P1 + _n52Bn2C3*P2 - C*P3) * d*d
@@ -85,6 +86,7 @@ namespace NiakoKerbalMods {
 			}
 
 			public double InterpolateHeights(double u, double v) {
+				//If for some reason the constants have not been calculated
 				if(!hasConstantsPrecalculated) {
 					PrecalculateConstants();
 				}
@@ -99,7 +101,6 @@ namespace NiakoKerbalMods {
 				double vD = (v - v0) * heightMap.Height;
 
 				//Calculate height (Interpolate)
-
 				for(int j = -1; j < 3; j++) {
 					Int32 y = Clamp(y0 + j, 0, heightMap.Height);
 					for(int i = -1; i < 3; i++) {
@@ -107,12 +108,9 @@ namespace NiakoKerbalMods {
 						PX[i + 1] = heightMap.GetPixelFloat(x, y);
 					}
 					PY[j+1] = RunMitchellNetravali(PX[0], PX[1], PX[2], PX[3], uD);
-					//PY[j + 1] = PX[0];
 				}
 
 				double output = RunMitchellNetravali(PY[0], PY[1], PY[2], PY[3], vD);
-
-				//return heightMap.GetPixelFloat(u, v);
 
 				return output;
 			}
@@ -123,9 +121,6 @@ namespace NiakoKerbalMods {
 			}
 
 			public override void OnVertexBuildHeight(PQS.VertexBuildData data) {
-				//base.OnVertexBuildHeight(data); //Normal Bilineal Filtered Heightmap
-
-				//Apply height
 				data.vertHeight += heightMapOffset + heightMapDeformity * (double)InterpolateHeights(data.u, data.v);
 			}
 		}
