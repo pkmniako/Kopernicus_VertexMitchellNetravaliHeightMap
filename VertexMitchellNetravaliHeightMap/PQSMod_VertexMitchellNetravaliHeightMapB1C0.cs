@@ -63,8 +63,8 @@ namespace NiakoKerbalMods
 #region Mitchell Netravali
 
 			/// <summary>
-			/// Run the Mitchell-Netravali algorithm for 4 samples using the
-			/// precalculated constants of <see cref="PrecalculateConstants"/> 
+			/// Run the Mitchell-Netravali algorithm for 4 samples using hardcoded constant.
+			/// Check <see cref="PQSMod_VertexMitchellNetravaliHeightMap"/> to see how they are calculated
 			/// </summary>
 			public double RunMitchellNetravali(double P0, double P1, double P2, double P3, double d) {
 				double output = (_n6BnC*P0 + _n32BnC2*P1 + _32BCn2*P2 + _6BC*P3) * d*d*d
