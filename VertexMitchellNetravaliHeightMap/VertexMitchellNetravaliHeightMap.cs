@@ -18,7 +18,9 @@ namespace NiakoKerbalMods {
     	[RequireConfigType(ConfigType.Node)]
     	[SuppressMessage("ReSharper", "UnusedMember.Global")]
 		public class VertexMitchellNetravaliHeightMap : ModLoader<PQSMod_VertexMitchellNetravaliHeightMap> {
-			// The map texture for the planet
+			/// <summary>
+			/// Reference to the heightmap to be used in this PQS mod
+			/// </summary>
 			[ParserTarget("map")]
 			public MapSOParserGreyScale<MapSO> HeightMap
 			{
@@ -26,7 +28,9 @@ namespace NiakoKerbalMods {
 				set { Mod.heightMap = value; }
 			}
 
-			// Height map offset
+			/// <summary>
+			/// Height map offset
+			/// </summary>
 			[ParserTarget("offset")]
 			public NumericParser<Double> HeightMapOffset
 			{
@@ -34,7 +38,11 @@ namespace NiakoKerbalMods {
 				set { Mod.heightMapOffset = value; }
 			}
 
-			// Height map offset
+			/// <summary>
+			/// Heightmap deformity, that is, in meters, the altitude difference
+			/// between the deepest and the tallest point of the heightmap, unless
+			/// <see cref="ScaleDeformityByRadius"/> is set 
+			/// </summary>
 			[ParserTarget("deformity")]
 			public NumericParser<Double> HeightMapDeformity
 			{
@@ -42,7 +50,10 @@ namespace NiakoKerbalMods {
 				set { Mod.heightMapDeformity = value; }
 			}
 
-			// Height map offset
+			/// <summary>
+			/// If set to true, <see cref="HeightMapDeformity"/> works as a scalar
+			/// instead of being an absolute height
+			/// </summary>
 			[ParserTarget("scaleDeformityByRadius")]
 			public NumericParser<Boolean> ScaleDeformityByRadius
 			{
@@ -50,12 +61,18 @@ namespace NiakoKerbalMods {
 				set { Mod.scaleDeformityByRadius = value; }
 			}
 
+			/// <summary>
+			/// Parameter B for the Mitchell-Netravali algorithm
+			/// </summary>
 			[ParserTarget("B")]
 			public NumericParser<Double> B {
 				get { return Mod.B; }
 				set { Mod.B = value; }
 			}
 
+			/// <summary>
+			/// Parameter C for the Mitchell-Netravali algorithm
+			/// </summary>
 			[ParserTarget("C")]
 			public NumericParser<Double> C {
 				get { return Mod.C; }

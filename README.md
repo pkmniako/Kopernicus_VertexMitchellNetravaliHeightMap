@@ -12,7 +12,7 @@ This mod still requires testing (Just in case), so use it with caution.
 
 ## Usage
 
-With a compiled .dll file inside the ``GameData``, you can use the ``VertexMitchellNetravaliHeightMap`` PQS Mod in Kopernicus Configuration Files.
+With a compiled .dll file inside the ``GameData``, you can use the ``VertexMitchellNetravaliHeightMap`` PQS Mod in [Kopernicus](https://github.com/Kopernicus/Kopernicus) Configuration Files.
 
 The PQSs mod also contains two new parameters: ``B`` and ``C``. These control what type of filtering is done. Values ``B = 1/3, C = 1/3`` and ``B = 1, C = 0`` have been tested and yield decent results (Though the later is by far the most smooth).
 
@@ -53,7 +53,18 @@ _VertexHeightMap, Stock_
 
 ## Compilation
 
-Make sure all .dll paths at ``VertexBilinealHeightMap/VertexBilinealHeightMap.csproj`` are correct, then run either the Makefile provided or ``dotnet build --configuration Release -o bin``.
+### Compilation dependencies
+
+- Have a folder `lib/gamedata` in the root of the project be a `GameData` folder with [Kopernicus](https://github.com/Kopernicus/Kopernicus) installed
+- Have a folder `lib/ksp` in the root of the project be a KSP's `KSP_Data/Managed`[^1] folder
+
+Recommended to use symbolic links. You can also edit `VertexMitchellNetravaliHeightMap.csproj` if you so wish to change the include paths.
+
+### Compilation command
+
+Two options:
+- Run the Makefile with `make`
+. Run ``dotnet build --configuration Release -o bin``
 
 ---
 ---
@@ -64,3 +75,8 @@ Make sure all .dll paths at ``VertexBilinealHeightMap/VertexBilinealHeightMap.cs
 Taked from [Wikipedia](https://en.wikipedia.org/wiki/Mitchell%E2%80%93Netravali_filters), using _Mitchell_'s and _Netravali_'s cubic alternate resampling formula:
 
 ![Formula from Wikipedia](README_IMGs/formula1.png)
+
+---
+---
+
+[^1]: In Windows, or if using Proton, this should be `KSP_x64_Data/Managed`

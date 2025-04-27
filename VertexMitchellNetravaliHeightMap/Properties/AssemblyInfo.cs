@@ -2,7 +2,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: KSPAssembly("KopernicusExpansion.VertexMitchellNetravaliHeightMap", 0, 3)]
+[assembly: KSPAssembly("KopernicusExpansion.VertexMitchellNetravaliHeightMap", 0, 4)]
 [assembly: KSPAssemblyDependency("Kopernicus", 1, 0)]
 
 [assembly: AssemblyTitle("VertexMitchellNetravaliHeightMap PQS Mod")]
@@ -11,5 +11,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © pkmniako 2022")]
 [assembly: ComVisible(false)]
 [assembly: Guid("FAE04EC0-301F-11D3-BF4B-00C04F79EFBC")]
-[assembly: AssemblyVersion("0.3.0.0")]
-[assembly: AssemblyFileVersion("0.3.0.0")]
+[assembly: AssemblyVersion("0.4.0.0")]
+[assembly: AssemblyFileVersion("0.4.0.0")]
